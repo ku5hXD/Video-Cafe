@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const dotenv = require('dotenv');
+dotenv.config();
 
-const connectionURL = "mongodb+srv://ku5h:ku5h@cluster0.4walf.mongodb.net/VideoCafeDB?retryWrites=true&w=majority";
+const connectionURL = process.env.MONGODB_SERVER_URI;
 
 // model
 var VideoDetails = require("./models/videoDetails");
