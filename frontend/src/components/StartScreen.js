@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const StartScreen = () => {
 
     return (
-        <div>
+        <div className="SSCSS">
             <div
                 className="HomeContainer"
                 style={{

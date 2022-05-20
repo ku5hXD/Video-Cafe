@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Route,
-  Link,
-  Switch,
-  NavLink,
-} from "react-router-dom";
+import { Route, Link, Switch, NavLink } from "react-router-dom";
 import "../css/Home.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +13,6 @@ import {
   faBasketballBall,
 } from "@fortawesome/free-solid-svg-icons";
 
-
 import logo from "../images/logo-2.png";
 import All from "./All";
 import Movies from "./Movies";
@@ -28,17 +22,21 @@ import Podcasts from "./Podcasts";
 import News from "./News";
 import Gaming from "./Gaming";
 import Music from "./Music";
+// import Login from "./login";
 
 const Home = () => {
   return (
-    <div>
+    <div className="homeCSS">
       <div className="navbar navbar-custom">
         <img src={logo} className="img1" style={{ marginLeft: "1rem" }} />
 
         <h2 className="cafe-title"> VIDEO CAFE </h2>
 
-        <Link to="/upload">
+        {/* <Link to="/upload">
           <button className="upld-btn">Upload</button>
+        </Link> */}
+        <Link to="/login">
+          <button className="upld-btn">login</button>
         </Link>
       </div>
 
@@ -79,7 +77,10 @@ const Home = () => {
             className="cat-link"
           >
             <h5 className="cat-link-text">
-              <FontAwesomeIcon icon={faGamepad} style={{ marginRight: "15px" }} />
+              <FontAwesomeIcon
+                icon={faGamepad}
+                style={{ marginRight: "15px" }}
+              />
               Gaming
             </h5>
           </NavLink>
@@ -106,7 +107,10 @@ const Home = () => {
             className="cat-link"
           >
             <h5 className="cat-link-text">
-              <FontAwesomeIcon icon={faPodcast} style={{ marginRight: "15px" }} />
+              <FontAwesomeIcon
+                icon={faPodcast}
+                style={{ marginRight: "15px" }}
+              />
               Podcasts
             </h5>
           </NavLink>
@@ -149,7 +153,6 @@ const Home = () => {
               Music
             </h5>
           </NavLink>
-
         </div>
 
         <div className="right-bar">
