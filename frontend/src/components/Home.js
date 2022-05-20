@@ -31,7 +31,7 @@ import Music from "./Music";
 
 const Home = () => {
   return (
-    <div>
+    <div className="homeCSS">
       <div className="navbar navbar-custom">
         <img src={logo} className="img1" style={{ marginLeft: "1rem" }} />
 
