@@ -98,7 +98,7 @@ const Video = (props) => {
 
 
   return (
-    <div className="videoCSS" style={{ backgroundColor: " #18181b" }}>
+    <div style={{ backgroundColor: " #18181b" }} className="videoCSS">
       <div className="navbar-custom-video">
         <h2 className="cafe-title1"> VIDEO CAFE </h2>
         <Link to={"/home/all"}>
