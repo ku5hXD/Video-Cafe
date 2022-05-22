@@ -40,6 +40,7 @@ const Login = () => {
   const changeAvatarHandler = (event) => {
     console.log(event.target.files[0])
     setAvatar(event.target.files[0]);
+    console.log("hello");
     // setIsSelected(true);
   };
 
