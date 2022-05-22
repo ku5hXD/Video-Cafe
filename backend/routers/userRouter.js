@@ -1,9 +1,11 @@
 const express = require("express");
 const User = require("../models/Users");
 
+const cors = require("cors");
 const route = express.Router();
 
 route.post("/signup", async (req, res) => {
+  console.log(req.body)
   const user = new User(req.body);
 
   try {
@@ -16,6 +18,7 @@ route.post("/signup", async (req, res) => {
 });
 
 route.post("/login", async (req, res) => {
+  console.log(req.body)
   try {
     const user = await User.findByCrendentials(
       req.body.email,

@@ -11,10 +11,10 @@ const connectionURL = process.env.MONGODB_SERVER_URI;
 var VideoDetails = require("./models/videoDetails");
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(userRoute);
-app.use(cors());
+
 app.use(express.static("public")); // this let's the front end (react) code to access the files that are on back end (node) server (not from the database)
 
 mongoose.connect(connectionURL, { useNewUrlParser: true });
