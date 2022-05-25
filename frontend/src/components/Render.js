@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Thumbnail from "./Thumbnail";
 import getDate from "./GetDate";
+
 const Render = ({ data, dates }) => {
 
     return (

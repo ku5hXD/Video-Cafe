@@ -16,7 +16,6 @@ const All = () => {
   }
 
   useEffect(() => {
-
     fetchData('', handleDetails, handleDates)
 
   }, []);

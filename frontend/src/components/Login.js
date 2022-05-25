@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "../css/Login.module.css";
-
-
+import { useAuth } from "../contexts/authContext";
 import bgVideo2 from "../images/bgVideo2.mp4";
-
+import Cookies from 'js-cookie'
 import google from "../images/google-icon.png"
 
 import { Moralis } from 'moralis';
+import { useHistory } from "react-router-dom"
 
 const Login = () => {
 
@@ -17,9 +17,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState();
-
-
-
+  const history = useHistory();
+  const { toggleAuth } = useAuth()
 
   // const signUpMethodDummy = () => {
   //   setSignUpState(current => !current);
@@ -56,7 +55,6 @@ const Login = () => {
     else {
       file = new Moralis.File(avatar.name, avatar);
       await file.saveIPFS();
-      alert("signed up successfully")
 
       const body = {
         name: name,
@@ -66,6 +64,10 @@ const Login = () => {
       }
       axios.post(`http://localhost:8000/signup`, body)
         .then(function (response) {
+          alert("signed up successfully")
+          toggleAuth(true);
+          Cookies.set('token', response.data.token)
+          history.push("/home/all");
           console.log(response);
         })
         .catch(function (error) {
@@ -86,6 +88,10 @@ const Login = () => {
     axios.post(`http://localhost:8000/login`, body)
       .then(function (response) {
         alert("sign in successfull")
+        toggleAuth(true);
+        Cookies.set('token', response.data.token)
+        Cookies.set('avatar', response.data.user.avatar)
+        history.push("/home/all");
         console.log(response);
       })
       .catch(function (error) {

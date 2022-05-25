@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Link, Switch, NavLink } from "react-router-dom";
 import "../css/Home.css";
-
+import { useAuth } from "../contexts/authContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faNewspaper,
@@ -23,8 +23,25 @@ import News from "./News";
 import Gaming from "./Gaming";
 import Music from "./Music";
 // import Login from "./login";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const Home = () => {
+  const { isAuthenticated, toggleAuth } = useAuth();
+  const [avatar, setAvatar] = useState("");
+
+
+  const readCookie = () => {
+    const user = Cookies.get("token");
+    if (user) {
+      toggleAuth(true)
+      setAvatar(Cookies.get("avatar"));
+    }
+  }
+
+  useEffect(() => {
+    readCookie()
+  }, [])
   return (
     <div className="homeCSS">
       <div className="navbar navbar-custom">
@@ -32,18 +49,25 @@ const Home = () => {
 
         <h2 className="cafe-title"> VIDEO CAFE </h2>
 
-        {/* <Link to="/upload">
-          <button className="upld-btn">Upload</button>
-        </Link> */}
-        <Link to="/login">
-          <button className="upld-btn">login</button>
-        </Link>
+        {
+          isAuthenticated ?
+            // <Link to="/upload">
+            //   <button className="upld-btn">Upload</button>
+            // </Link>
+            <Link to="/user">
+              <img width={45} height={45} src={avatar} style={{ borderRadius: 50, marginRight: '1rem' }} />
+            </Link>
+            :
+            <Link to="/login">
+              <button className="upld-btn">login</button>
+            </Link>
+        }
+
       </div>
 
       <div className="main-body">
         <div className="leftBar">
           <h2 className="category-title">Categories</h2>
-
           <NavLink
             to="all"
             style={{ textDecoration: "none" }}

@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const fetchData = (category, handleDetails, handleDates) => {
-
     axios
         .get(`http://localhost:8000/details2?category=${category}`)
         .then((res) => {

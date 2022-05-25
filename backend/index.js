@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const userRoute = require("./routers/userRouter");
 dotenv.config();
 
@@ -14,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(userRoute);
-
+app.use(cookieParser());
 app.use(express.static("public")); // this let's the front end (react) code to access the files that are on back end (node) server (not from the database)
 
 mongoose.connect(connectionURL, { useNewUrlParser: true });
@@ -82,6 +83,10 @@ app.get("/date", async (req, res) => {
       console.log(err);
     });
 });
+
+app.get("/getAvatar", async (req, res) => {
+
+})
 
 app.listen(8000, function () {
   console.log("server is running");

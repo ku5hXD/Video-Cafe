@@ -60,6 +60,20 @@
   margin-left: 0.5rem;
 }
 
+.videoCSS .category {
+  font-size: 1.1rem;
+  font-family: "Roboto", sans-serif;
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.videoCSS .date {
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 0.5rem;
+}
+
 .videoCSS .video---title {
   margin-top: 0.8rem;
   color: whitesmoke;
