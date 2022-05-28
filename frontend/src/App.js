@@ -10,7 +10,9 @@ import Login from "./components/Login";
 import ProfileScreen from "./components/ProfileScreen";
 // import AuthApi from "./contexts/authContext";
 import { AuthContextProvider } from "./contexts/authContext"
-import Cookies from "js-cookie";
+
+import PrivateRouteUpload from "./components/PrivateRouteUpload";
+import PrivateRouteUser from "./components/PrivateRouteUser";
 
 import { useAuth } from "./contexts/authContext";
 function App() {
@@ -21,10 +23,10 @@ function App() {
           <Switch>
             <Route exact path="/" component={StartScreen}></Route>
             <Route exact path="/home/*" component={Home}></Route>
-            <Route exact path="/upload" component={Upload}></Route>     {/* protected */}
+            <Route exact path="/upload" component={PrivateRouteUpload}></Route>     {/* protected */}
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/video/:videoId" component={Video}></Route>
-            <Route exact path="/user" component={ProfileScreen}></Route>
+            <Route exact path="/user" component={PrivateRouteUser}></Route>
           </Switch>
         </AuthContextProvider>
       </div>
