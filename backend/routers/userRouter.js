@@ -21,13 +21,13 @@ route.post("/signup", async (req, res) => {
 });
 
 route.post("/login", async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     const user = await User.findByCrendentials(
       req.body.email,
       req.body.password
     );
-    console.log(user)
+    // console.log(user)
     const token = await user.generateAuthToken();
 
     // cookie code

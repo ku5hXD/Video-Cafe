@@ -42,7 +42,7 @@
   letter-spacing: 1px;
 }
 
-.upld-btn {
+.homeCSS .upld-btn {
   margin-right: 1rem;
   background-color: transparent;
   color: white;
@@ -54,7 +54,7 @@
   transition: all 1s;
 }
 
-.upld-btn:hover {
+.homeCSS .upld-btn:hover {
   background-color: white;
   color: #000;
   border: 2px solid #000;

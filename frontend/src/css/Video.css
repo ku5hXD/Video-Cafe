@@ -31,6 +31,24 @@
   letter-spacing: 1px;
 }
 
+.videoCSS .upld-btn {
+  margin-right: 1rem;
+  background-color: transparent;
+  color: white;
+  padding: 5px 13px 5px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.2rem;
+  border: 2px solid white;
+  transition: all 1s;
+}
+
+.videoCSS .upld-btn:hover {
+  background-color: white;
+  color: #000;
+  border: 2px solid #000;
+}
+
 .videoCSS .div--1 {
   margin-top: 5rem;
   flex: 7;
