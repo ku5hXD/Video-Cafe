@@ -4,7 +4,7 @@ const User = require("../models/Users");
 const Auth = async (req, res, next) => {
     try {
         // const token = req.header("Authorization").replace("Bearer ", ""); // getting token from header
-        const token = req.cookies.token;
+        const token = req.query.token;
         const decoded = jwt.verify(token, "thisismyjwt"); // check if token is valid or not
         // console.log(decoded);
 
