@@ -6,6 +6,7 @@ import logo from "../images/logo-2.png";
 import uploadImage from "../images/upload.png";
 import "../css/Upload.css";
 import { Moralis } from 'moralis';
+import Cookies from "js-cookie";
 
 import bgVideo2 from "../images/bgVideo2.mp4";
 
@@ -21,6 +22,8 @@ const Upload = () => {
     { value: 0, label: "Podcasts" },
     { value: 0, label: "Music" },
   ];
+
+  const token = Cookies.get("token");
 
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -69,7 +72,7 @@ const Upload = () => {
 
       axios
         .post(
-          `http://localhost:8000/submit?videolink=${file?.ipfs()}&videoname=${details.name}&videodescription=${details.description}&videocategory=${details.category}`
+          `http://localhost:8000/submit?videolink=${file?.ipfs()}&videoname=${details.name}&videodescription=${details.description}&videocategory=${details.category}&token=${token}`
         )
         .then(function (response) {
           console.log(response);

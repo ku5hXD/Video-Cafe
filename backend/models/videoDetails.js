@@ -14,6 +14,11 @@ const videoDetailsSchema = mongoose.Schema({
     thumbnailPath: {
         type: String,
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
 }, { collection: 'video-details' });
 
 module.exports = mongoose.model("VideoDetails", videoDetailsSchema);

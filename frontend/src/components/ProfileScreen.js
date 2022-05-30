@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import React from "react";
+import { useState } from "react";
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/authContext";
-import "../css/ProfileScreen.css"
+import styles from "../css/ProfileScreen.module.css"
 import logo from "../images/logo-2.png";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -10,6 +11,7 @@ import 'react-tabs/style/react-tabs.css';
 const ProfileScreen = () => {
 
 
+    const [tabState,setTabState] = useState(true);
     const history = useHistory();
     const { isAuthenticated, toggleAuth } = useAuth();
 
@@ -21,40 +23,40 @@ const ProfileScreen = () => {
     }
 
     return (
-        <div className="PSCSS">
-            <div className="navbar navbar-custom">
-                <img src={logo} className="img1" style={{ marginLeft: "1rem" }} />
+        <div className={styles.PSCSS}>
+            <div className={` ${styles.navbarCustom}`}>
+                <img src={logo} className={styles.img1} style={{ marginLeft: "1rem" }} />
 
-                <h2 className="cafe-title"> VIDEO CAFE </h2>
+                <h2 className={styles.cafeTitle}> VIDEO CAFE </h2>
 
-                <button className="upld-btn" onClick={logoutMethod}>Logout</button>
+                <button className={styles.upldBtn} onClick={logoutMethod}>Logout</button>
 
             </div>
-            <div className="ps-body">
-                <div className="ps-left-part">
-                    <div class="ps-card">
-                        <div class="ps-card-header">
-                            <div class="ps-card-photo">
+            <div className={styles.psBody}>
+                <div className={styles.psLeftPart}>
+                    <div class={styles.psCard}>
+                        <div class={styles.psCardHeader}>
+                            <div class={styles.psCardPhoto}>
                                 <img src="https://demos.creative-tim.com/impact-design-system-pro/docs/assets/img/team/6.jpg" alt="" />
                             </div>
                         </div>
-                        <div class="ps-card-body">
-                            <h3 class="ps-card-name">Beni Smith</h3>
-                            <p class="ps-card-description">User Interface Designer and <br />front-end developer</p>
-                            <div class="ps-card-button">
+                        <div class={styles.psCardBody}>
+                            <h3 class={styles.psCardName}>Beni Smith</h3>
+                            <p class={styles.psCardDescription}>User Interface Designer and <br />front-end developer</p>
+                            <div class={styles.psCardButton}>
                                 <Link to="/upload">
-                                    <button class="ps-btn ps-btn-primary">Upload</button>
+                                    <button class={`${styles.psBtn}  ${styles.psBtnPrimary}`}>Upload</button>
                                 </Link>
-                                <button class="ps-btn ps-btn-outline-primary">Edit</button>
+                                <button class={`${styles.psBtn} ${styles.psBtnOutlinePrimary}`}>Edit</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="ps-right-part" style={{ paddingTop: '5rem' }}>
+                <div className={styles.psRightPart} style={{ paddingTop: '4rem' }}>
 
-                    <Tabs>
-                        <TabList>
-                            <Tab>Title 1</Tab>
+                    {/* <Tabs>
+                        <TabList className="tabList">
+                            <Tab className="tabBtn">Title 1</Tab>
                             <Tab>Title 2</Tab>
                         </TabList>
 
@@ -64,7 +66,25 @@ const ProfileScreen = () => {
                         <TabPanel>
                             <h2>Any content 2</h2>
                         </TabPanel>
-                    </Tabs>
+                    </Tabs> */}
+
+                    <div class={styles.rightHeader}>
+                        <button className={styles.tabBtn}  onClick={() => {
+                           console.log("tab1")
+                           setTabState(true);
+                       }}>Tab1</button>
+                        <button className={styles.tabBtn} onClick={() => {
+                           console.log("tab2");
+                           setTabState(false);
+                       }}>Tab2</button>
+                    </div>
+                    <div className={styles.rightBody}>
+                       <div className={`${tabState ? styles.activeTab : styles.hiddenTab}`}
+                      > BODY 1 </div>
+                       <div className={`${tabState ? styles.hiddenTab : styles.activeTab}`}
+                       > BODY 2</div>
+                    </div>
+
                 </div>
             </div>
         </div >
