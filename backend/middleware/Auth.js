@@ -5,7 +5,8 @@ const Auth = async (req, res, next) => {
     try {
         // const token = req.header("Authorization").replace("Bearer ", ""); // getting token from header
         const token = req.query.token;
-        const decoded = jwt.verify(token, "thisismyjwt"); // check if token is valid or not
+        // console.log(token)
+        const decoded = jwt.verify(token, process.env.JWT_KEY); // check if token is valid or not
         // console.log(decoded);
 
         // find user by id and token

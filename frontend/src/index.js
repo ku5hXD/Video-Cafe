@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <MoralisProvider appId='fGasuAdAzKAwcd1NmQ6MjxMBDpEh8frbuJWpxSVq' serverUrl='https://as7gs0ed52qy.usemoralis.com:2053/server'>
+    <MoralisProvider appId='2h9n2e8wGcQgcxZMvea7QlrYv7YCREVKxLoJi88j' serverUrl='https://mc9lhf77uebp.usemoralis.com:2053/server'>
       <App />
     </MoralisProvider>
   </React.StrictMode>,

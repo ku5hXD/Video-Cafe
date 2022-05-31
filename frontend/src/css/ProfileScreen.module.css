@@ -197,23 +197,23 @@
 
 .PSCSS .rightHeader {
     display: flex;
-    flex : 1;
+    flex: 1;
     /* justify-content:end; */
     border: 1px;
     border-color: black;
 }
 
 .PSCSS .tabBtn {
-    flex : 1;
+    flex: 1;
 }
 
 .PSCSS .rightBody {
-    flex : 13;
+    flex: 13;
 }
 
-.PSCSS .activetab {
+/* .PSCSS .activetab {
 
-}
+} */
 
 .PSCSS .hiddenTab {
     display: none;

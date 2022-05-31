@@ -6,9 +6,17 @@ import logo from "../images/logo-2.png";
 import uploadImage from "../images/upload.png";
 import "../css/Upload.css";
 import { Moralis } from 'moralis';
+import { useMoralisCloudFunction } from "react-moralis";
 import Cookies from "js-cookie";
 
 import bgVideo2 from "../images/bgVideo2.mp4";
+
+import { create } from "ipfs-http-client";
+
+import { Buffer } from 'buffer';
+
+
+const client = create('https://ipfs.infura.io:5001/api/v0');
 
 
 const Upload = () => {
@@ -25,7 +33,6 @@ const Upload = () => {
 
   const token = Cookies.get("token");
 
-
   const onDrop = useCallback((acceptedFiles) => {
     if (!acceptedFiles[0]) {
       alert("please choose video file only");
@@ -40,6 +47,7 @@ const Upload = () => {
   });
 
   const [videoFile, setVideoFile] = useState();
+  const [bufferFile, setBufferFile] = useState(null);
   const [details, setDetails] = useState({
     name: "",
     description: "",
@@ -65,22 +73,36 @@ const Upload = () => {
       alert("please choose video file");
     }
     else {
-      file = new Moralis.File(videoFile.name, videoFile);
-      await file.saveIPFS();
-      alert("video uploaded!!")
-      console.log(file.ipfs(), file.hash())
 
-      axios
-        .post(
-          `http://localhost:8000/submit?videolink=${file?.ipfs()}&videoname=${details.name}&videodescription=${details.description}&videocategory=${details.category}&token=${token}`
-        )
-        .then(function (response) {
-          console.log(response);
-          alert("video uploaded");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      //  basic IPFS CODE
+
+      const reader = new window.FileReader();
+      reader.readAsArrayBuffer(videoFile);
+
+      reader.onloadend = async () => {
+        console.log("Buffer data: ", Buffer(reader.result));
+        // setBufferFile(Buffer(reader.result))
+        try {
+          const created = await client.add(Buffer(reader.result));
+          const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+          console.log("video uploaded at : ", url)
+
+          axios
+            .post(
+              `http://localhost:8000/submit?videolink=${url}&videoname=${details.name}&videodescription=${details.description}&videocategory=${details.category}&token=${token}`
+            )
+            .then(function (response) {
+              console.log(response);
+              alert("video uploaded");
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
     }
   };
 
