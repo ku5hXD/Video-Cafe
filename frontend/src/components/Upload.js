@@ -14,7 +14,7 @@ import bgVideo2 from "../images/bgVideo2.mp4";
 import { create } from "ipfs-http-client";
 
 import { Buffer } from 'buffer';
-
+import { useHistory } from "react-router-dom"
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
@@ -30,7 +30,7 @@ const Upload = () => {
     { value: 0, label: "Podcasts" },
     { value: 0, label: "Music" },
   ];
-
+  const history = useHistory();
   const token = Cookies.get("token");
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -94,6 +94,7 @@ const Upload = () => {
             .then(function (response) {
               console.log(response);
               alert("video uploaded");
+              history.push("/home/all");
             })
             .catch(function (error) {
               console.log(error);

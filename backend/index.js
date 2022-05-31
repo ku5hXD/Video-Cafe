@@ -11,6 +11,7 @@ const connectionURL = process.env.MONGODB_SERVER_URI;
 
 // model
 var VideoDetails = require("./models/videoDetails");
+var User = require("./models/Users");
 
 const app = express();
 app.use(cors());
@@ -41,7 +42,8 @@ app.post("/submit", Auth, async (req, res) => {
   });
   video_details.save(function (err, videodetail) {
     if (err) return console.error(err);
-    console.log(videodetail.videoname + " saved to video-details collection.");
+    // console.log(videodetail.videoname + " saved to video-details collection.");
+    res.send("video details stored in DB")
   });
 });
 
@@ -58,6 +60,7 @@ app.get("/details2", async (req, res) => {
     if (!req.query.category) {
       await VideoDetails.find({})
         .then((arr) => {
+          // console.log(arr)
           res.status(201).send(arr);
         })
         .catch((err) => {
@@ -86,7 +89,11 @@ app.get("/date", async (req, res) => {
     });
 });
 
-app.get("/getAvatar", async (req, res) => {});
+app.get("/getName", Auth, async (req, res) => {
+  res.send(req.user.name);
+});
+
+
 
 app.get("/getVideoById", Auth, async (req, res) => {
   await VideoDetails.find({ owner: req.user._id })

@@ -4,19 +4,43 @@
     height: 100%;
     width: 100%;
     display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.lv-link {
+    text-decoration: none;
 }
 
 .lv-box {
+    background-color: #292343;
     border: 1px black;
-    flex : 1;
+    flex: 1;
+    margin: 1rem;
+    max-height: 20vh;
+    min-height: 20vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .left-box {
-    flex :1;
+    flex: 2;
+}
+
+.left-box img {
+    width: 100%
 }
 
 .right-box {
-    flex : 1;
+    padding: 1rem;
+    flex: 5;
+    flex-direction: column;
+}
+
+.lv-video-title {
+    color: white;
+}
+
+.lv-date {
+    color: white;
 }

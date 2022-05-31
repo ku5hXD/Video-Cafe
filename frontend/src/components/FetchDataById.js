@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const FetchDataById = (handleDetails, handleDates) => {
+const FetchDataById = (token, handleDetails, handleDates) => {
   axios
-    .get(`http://localhost:8000/getVideoById`)
+    .get(`http://localhost:8000/getVideoById?token=${token}`)
     .then((res) => {
       var dataDuplicate = [];
       for (var i = 0; i < res.data.length; i++) {

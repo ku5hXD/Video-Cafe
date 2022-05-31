@@ -209,13 +209,14 @@
 
 .PSCSS .rightBody {
     flex: 13;
+    overflow: hidden;
 }
 
 .PSCSS .activeTab {
     background-color: #03bfbc;
     height: 100%;
     border: 1px black;
-
+    overflow: hidden;
 }
 
 .PSCSS .hiddenTab {

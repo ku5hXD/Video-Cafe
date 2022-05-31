@@ -12,8 +12,9 @@ const Render = ({ data, dates }) => {
                 data.map((element, index) => {
                     if (data.length === 0) {
                     } else {
+                        console.log(element)
                         return (
-                            <div className="custom-card">
+                            < div className="custom-card" >
                                 <Link
                                     to={`/video/${element._id}`}
                                     style={{ textDecoration: "none" }}
@@ -40,7 +41,7 @@ const Render = ({ data, dates }) => {
 
 
             }
-        </div>
+        </div >
     )
 }
 

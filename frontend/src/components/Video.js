@@ -113,7 +113,7 @@ const Video = (props) => {
             key={_id}
             id="videoPlayer"
             controls
-            muted="muted"
+            autoPlay="true"
             className="video-screen"
           >
             <source src={details.videolink} type="video/mp4" />

@@ -9,6 +9,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import FetchDataById from "./FetchDataById";
 import ListVideo from "./ListVideo";
+import axios from "axios";
 
 const ProfileScreen = () => {
   const [tabState, setTabState] = useState(true);
@@ -17,7 +18,8 @@ const ProfileScreen = () => {
 
   const [data, setData] = useState([]);
   const [dates, setDates] = useState([]);
-
+  const [avatar, setAvatar] = useState();
+  const [name, setName] = useState("");
   const handleDetails = (value) => {
     setData(value);
   };
@@ -32,8 +34,22 @@ const ProfileScreen = () => {
     toggleAuth(false);
   };
 
+
+
   useEffect(() => {
-    FetchDataById(handleDetails, handleDates);
+    const token = Cookies.get("token");
+    FetchDataById(token, handleDetails, handleDates);
+    const avatar = Cookies.get("avatar");
+    setAvatar(avatar);
+    axios
+      .get(`http://localhost:8000/getName?token=${token}`)
+      .then((res) => {
+        console.log(res.data)
+        setName(res.data)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }, []);
 
   return (
@@ -57,13 +73,13 @@ const ProfileScreen = () => {
             <div class={styles.psCardHeader}>
               <div class={styles.psCardPhoto}>
                 <img
-                  src="https://demos.creative-tim.com/impact-design-system-pro/docs/assets/img/team/6.jpg"
+                  src={avatar}
                   alt=""
                 />
               </div>
             </div>
             <div class={styles.psCardBody}>
-              <h3 class={styles.psCardName}>Beni Smith</h3>
+              <h3 class={styles.psCardName}>{name}</h3>
               <p class={styles.psCardDescription}>
                 User Interface Designer and <br />
                 front-end developer
@@ -74,9 +90,11 @@ const ProfileScreen = () => {
                     Upload
                   </button>
                 </Link>
-                <button class={`${styles.psBtn} ${styles.psBtnOutlinePrimary}`}>
-                  Edit
-                </button>
+                <Link to="/home/all">
+                  <button class={`${styles.psBtn} ${styles.psBtnOutlinePrimary}`}>
+                    Home
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -104,7 +122,7 @@ const ProfileScreen = () => {
                 setTabState(true);
               }}
             >
-              Tab1
+              Your Videos
             </button>
             <button
               className={styles.tabBtn}
@@ -113,20 +131,19 @@ const ProfileScreen = () => {
                 setTabState(false);
               }}
             >
-              Tab2
+              Liked Videos
             </button>
           </div>
           <div className={styles.rightBody}>
             <div
               className={`${tabState ? styles.activeTab : styles.hiddenTab}`}
             >
-              <ListVideo />
+              <ListVideo data={data} dates={dates} />
             </div>
             <div
               className={`${tabState ? styles.hiddenTab : styles.activeTab}`}
             >
-              {" "}
-              BODY 2
+              CODING IN PROGRESS! CHECK BACK LATER
             </div>
           </div>
         </div>
