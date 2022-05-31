@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routers/userRouter");
-const Auth = require("./middleware/Auth")
+const Auth = require("./middleware/Auth");
 dotenv.config();
 
 const connectionURL = process.env.MONGODB_SERVER_URI;
@@ -29,7 +29,7 @@ conn.on("disconnected", function () {
 });
 conn.on("error", console.error.bind(console, "connection error:"));
 
-app.post("/submit",Auth, async (req, res) => {
+app.post("/submit", Auth, async (req, res) => {
   var video_details = new VideoDetails({
     videoLink: req.query.videolink,
     videoName: req.query.videoname,
@@ -37,7 +37,7 @@ app.post("/submit",Auth, async (req, res) => {
     category: req.query.videocategory,
     uploadDate: new Date(),
     thumbnailPath: "https://i.ytimg.com/vi/AwhyFo5N0cg/maxresdefault.jpg",
-    owner : req.user._id
+    owner: req.user._id,
   });
   video_details.save(function (err, videodetail) {
     if (err) return console.error(err);
@@ -86,9 +86,17 @@ app.get("/date", async (req, res) => {
     });
 });
 
-app.get("/getAvatar", async (req, res) => {
+app.get("/getAvatar", async (req, res) => {});
 
-})
+app.get("/getVideoById", Auth, async (req, res) => {
+  await VideoDetails.find({ owner: req.user._id })
+    .then((arr) => {
+      res.status(201).send(arr);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 app.listen(8000, function () {
   console.log("server is running");

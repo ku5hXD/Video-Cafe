@@ -211,9 +211,12 @@
     flex: 13;
 }
 
-/* .PSCSS .activetab {
+.PSCSS .activeTab {
+    background-color: #03bfbc;
+    height: 100%;
+    border: 1px black;
 
-} */
+}
 
 .PSCSS .hiddenTab {
     display: none;
