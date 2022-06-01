@@ -58,22 +58,54 @@ app.get("/details2", async (req, res) => {
       });
   } else {
     if (!req.query.category) {
+      var tempArr;
       await VideoDetails.find({})
         .then((arr) => {
-          // console.log(arr)
-          res.status(201).send(arr);
+          tempArr = arr;
         })
         .catch((err) => {
           console.log(err);
         });
+
+      // for adding video owner name and picture to the fetched data
+      var finalArr = [];
+      var tempArrLength = tempArr.length;
+      tempArr.forEach(async (element, index) => {
+        await User.findOne({ _id: element.owner })
+          .then((data) => {
+            element = { ...element._doc, ownerName: data.name, ownerAvatar: data.avatar }
+            finalArr = [...finalArr, element]
+            tempArrLength--;
+            if (tempArrLength === 0) {
+              res.status(201).send(finalArr);
+            }
+          })
+      });
     } else {
+      var tempArr;
       await VideoDetails.find({ category: req.query.category })
         .then((arr) => {
-          res.status(201).send(arr);
+          tempArr = arr;
         })
         .catch((err) => {
           console.log(err);
         });
+
+      // for adding video owner name and picture to the fetched data
+      var finalArr = [];
+      var tempArrLength = tempArr.length;
+      tempArr.forEach(async (element, index) => {
+        await User.findOne({ _id: element.owner })
+          .then((data) => {
+            element = { ...element._doc, ownerName: data.name, ownerAvatar: data.avatar }
+            finalArr = [...finalArr, element]
+            tempArrLength--;
+            if (tempArrLength === 0) {
+              res.status(201).send(finalArr);
+            }
+          })
+      });
+
     }
   }
 });

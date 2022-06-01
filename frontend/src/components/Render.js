@@ -12,7 +12,7 @@ const Render = ({ data, dates }) => {
                 data.map((element, index) => {
                     if (data.length === 0) {
                     } else {
-                        console.log(element)
+                        // console.log(element)
                         return (
                             < div className="custom-card" >
                                 <Link
@@ -20,18 +20,17 @@ const Render = ({ data, dates }) => {
                                     style={{ textDecoration: "none" }}
                                 >
                                     <Thumbnail thumbnailpath={element.thumbnailpath} key={index} />
-                                    <div style={{ marginLeft: "0.5rem" }}>
-                                        <h4 className="video-title">{element.videoname}</h4>
+                                    <div className="video-desc" style={{ marginLeft: "0.5rem", }}>
+                                        <img className="video-desc-left" width={45} height={45} src={element.ownerAvatar} style={{ borderRadius: 50, marginRight: '1rem' }} />
+                                        <div className="video-desc-right">
+                                            <h4 className="video-title">{element.videoname}</h4>
 
-                                        <h4
-                                            style={{
-                                                fontSize: "1rem",
-                                                color: "black",
-                                            }}
-                                        >
-                                            {element.category}
-                                        </h4>
-                                        <p className="date">{getDate(dates[index])}</p>
+                                            <h4 className="owner-name">
+                                                {element.ownerName}
+                                            </h4>
+                                            <p className="date">{getDate(dates[index])}</p>
+                                        </div>
+
                                     </div>
                                 </Link>
                             </div>

@@ -148,23 +148,27 @@
   /* border-radius: 0px; */
 }
 
+.homeCSS .video-desc-left {
+  float: left;
+}
+
 .homeCSS .video-title {
-  width: 20rem;
+  /* width: 17.8rem; */
   height: 3.3rem;
   font-size: 1.3rem;
   color: white;
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
   font-family: "Roboto", sans-serif;
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.homeCSS .category {
+.homeCSS .owner-name {
   font-size: 1.1rem;
   font-family: "Roboto", sans-serif;
   color: #aaaaaa;
-  margin: 0;
+  margin-top: -1.5rem;
 }
 
 .homeCSS .date {
@@ -172,6 +176,7 @@
   font-size: 0.9rem;
   font-family: "Roboto", sans-serif;
   margin-bottom: 0.5rem;
+  margin-left: 3.8rem;
 }
 
 ::-webkit-scrollbar {

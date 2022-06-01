@@ -8,6 +8,9 @@ import google from "../images/google-icon.png"
 
 import { Moralis } from 'moralis';
 import { useHistory } from "react-router-dom"
+import { Buffer } from 'buffer';
+import { create } from "ipfs-http-client";
+const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const Login = () => {
 
@@ -53,27 +56,35 @@ const Login = () => {
       alert('password khoto chhe')
     }
     else {
-      file = new Moralis.File(avatar.name, avatar);
-      await file.saveIPFS();
-
-      const body = {
-        name: name,
-        email: email,
-        password: password,
-        avatar: file?.ipfs()
+      //  basic IPFS CODE
+      const reader = new window.FileReader();
+      reader.readAsArrayBuffer(avatar);
+      reader.onloadend = async () => {
+        try {
+          const created = await client.add(Buffer(reader.result));
+          const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+          const body = {
+            name: name,
+            email: email,
+            password: password,
+            avatar: url
+          }
+          axios.post(`http://localhost:8000/signup`, body)
+            .then(function (response) {
+              alert("signed up successfully")
+              toggleAuth(true);
+              Cookies.set('token', response.data.token)
+              history.push("/home/all");
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+        catch (e) {
+          console.log(e)
+        }
       }
-      axios.post(`http://localhost:8000/signup`, body)
-        .then(function (response) {
-          alert("signed up successfully")
-          toggleAuth(true);
-          Cookies.set('token', response.data.token)
-          history.push("/home/all");
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
     }
   }
   const signInHandler = (e) => {

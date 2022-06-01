@@ -14,6 +14,8 @@ const fetchData = (category, handleDetails, handleDates) => {
                         videoname: res.data[i].videoName,
                         description: res.data[i].description,
                         thumbnailpath: res.data[i].thumbnailPath,
+                        ownerName: res.data[i].ownerName,
+                        ownerAvatar: res.data[i].ownerAvatar
                     },
                 ];
             }
@@ -21,7 +23,7 @@ const fetchData = (category, handleDetails, handleDates) => {
             axios
                 .get("http://localhost:8000/date")
                 .then((res) => {
-
+                    console.log(res.data)
                     const needyDate = res.data.filter((date) => {
                         const mydate = dataDuplicate.find((ele) => {
                             return ele._id === date._id;

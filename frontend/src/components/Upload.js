@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
@@ -15,6 +15,8 @@ import { create } from "ipfs-http-client";
 
 import { Buffer } from 'buffer';
 import { useHistory } from "react-router-dom"
+
+import ReactLoading from 'react-loading';
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
@@ -53,6 +55,9 @@ const Upload = () => {
     description: "",
     category: "News",
   });
+  const [loading, setLoading] = useState(false);
+
+
 
   const handleName = (e) => {
     setDetails({ ...details, name: e.target.value });
@@ -83,10 +88,11 @@ const Upload = () => {
         console.log("Buffer data: ", Buffer(reader.result));
         // setBufferFile(Buffer(reader.result))
         try {
+          setLoading(true)
           const created = await client.add(Buffer(reader.result));
           const url = `https://ipfs.infura.io/ipfs/${created.path}`;
           console.log("video uploaded at : ", url)
-
+          setLoading(false)
           axios
             .post(
               `http://localhost:8000/submit?videolink=${url}&videoname=${details.name}&videodescription=${details.description}&videocategory=${details.category}&token=${token}`
@@ -107,13 +113,25 @@ const Upload = () => {
     }
   };
 
-  return (
 
+
+  return (
     <div className="upload-container">
+
       <video autoPlay loop muted className="bgVideo">
         <source src={bgVideo2} type="video/mp4" />
       </video>
-
+      {
+        loading
+          ?
+          <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: "center", position: 'absolute', backgroundColor: "rgba(0, 0, 0, 0.4)", height: '100vh', width: '100vw' }}>
+            <ReactLoading type={'bars'} color={'white'} height={200} width={112} />
+            <p style={{ marginTop: '-5rem', fontSize: '2rem', color: "white" }}>Uploading Video!</p>
+          </div>
+          :
+          <div style={{ display: 'none' }}>
+          </div>
+      }
       <div className="u-container">
         <div className="left-div">
           <div className="left-logo-name-div">
@@ -203,6 +221,7 @@ const Upload = () => {
 
       <div className="div-2"></div>
     </div>
+
   );
 };
 

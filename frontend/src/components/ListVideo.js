@@ -6,12 +6,17 @@ import "../css/ListVideo.css"
 
 
 const ListVideo = ({ data, dates }) => {
+  if (data.length === 0) {
+    return (
+      <img src="https://beaumonthfsi.com/img/no-video.gif" />
+    )
+  }
   return (
     <div className="lv-main">
       {
         data.map((element, index) => {
-          console.log(element)
           if (data.length === 0) {
+
             return (
               <div>
                 <h3>No Videos Found !! Please upload videos</h3>
