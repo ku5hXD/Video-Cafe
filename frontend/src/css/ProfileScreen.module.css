@@ -22,6 +22,17 @@
     border-bottom: 1px solid black;
 }
 
+.PSCSS .bgVideo {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    -webkit-filter: blur(5px);
+  }
+
 .PSCSS img {
     height: 100%;
 }
@@ -69,16 +80,18 @@
 
 .PSCSS .psBody {
     display: flex;
+    z-index: 1;
 }
 
 .PSCSS .psLeftPart {
     display: flex;
     justify-content: center;
     flex: 1;
-    background-color: #28223f;
+    /* background-color: #4a90ce; */
     height: 100%;
     /* background-color: red; */
     height: 100vh;
+    z-index: 1;
 }
 
 .PSCSS .psRightPart {
@@ -88,6 +101,7 @@
     height: 100%;
     height: 100vh;
     flex-direction: column;
+    z-index: 1;
 }
 
 
@@ -117,7 +131,7 @@
     border-radius: 50%;
     border: 1px solid #1f1a32;
     padding: 7px;
-    background-color: #292343;
+    background-color: #003466;
     overflow: hidden;
     transform: translateY(calc(50% + 40px));
 }
@@ -130,7 +144,7 @@
 }
 
 .PSCSS .psCardBody {
-    background-color: #231e39;
+    background-color: #003466;
     padding: 16px 15px 16px;
     text-align: center;
     border-radius: 0 0 5px 5px;
@@ -170,7 +184,7 @@
 
 .PSCSS .psBtnPrimary,
 .PSCSS .psBtnOutlinePrimary {
-    border: 1px solid #03bfbc;
+    border: 1px solid #b3b8cd;
     margin-right: 1rem;
     margin-left: 1rem;
     width: 7rem;
@@ -179,13 +193,13 @@
 .PSCSS .psBtnPrimary,
 .PSCSS .psBtnOutlinePrimary:hover {
     color: #231e39;
-    background-color: #03bfbc;
+    background-color: #71b6f3;
 }
 
 .PSCSS .psBtnPrimary:hover,
 .PSCSS .psBtnOutlinePrimary {
     background-color: transparent;
-    color: #03bfbc;
+    color: #b3b8cd;
 }
 
 
@@ -199,12 +213,18 @@
     display: flex;
     flex: 1;
     /* justify-content:end; */
-    border: 1px;
-    border-color: black;
+    /* border: 1px; */
+   
+    /* border-color: black; */
+    border:1px solid #b3b8cd;
 }
 
 .PSCSS .tabBtn {
     flex: 1;
+    font-family: cursive;
+    font-size: 1.5rem;
+    background-color: #003466;
+    color: #b3b8cd;
 }
 
 .PSCSS .rightBody {
@@ -213,10 +233,11 @@
 }
 
 .PSCSS .activeTab {
-    background-color: #03bfbc;
+    /* background-color: #003466 */
     height: 100%;
-    border: 1px black;
+    /* border: 1px black; */
     overflow: hidden;
+    background-image: url(https://bafybeibjyoyajb2znqx4dtn4y2ukujyg7yf25eim5e3km5sx7apupwugi4.ipfs.infura-ipfs.io/);
 }
 
 .PSCSS .hiddenTab {

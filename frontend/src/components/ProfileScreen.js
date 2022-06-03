@@ -10,6 +10,7 @@ import "react-tabs/style/react-tabs.css";
 import FetchDataById from "./FetchDataById";
 import ListVideo from "./ListVideo";
 import axios from "axios";
+import bgVideo2 from "../images/bgVideo2.mp4";
 
 const ProfileScreen = () => {
   const [tabState, setTabState] = useState(true);
@@ -34,8 +35,6 @@ const ProfileScreen = () => {
     toggleAuth(false);
   };
 
-
-
   useEffect(() => {
     const token = Cookies.get("token");
     FetchDataById(token, handleDetails, handleDates);
@@ -44,16 +43,19 @@ const ProfileScreen = () => {
     axios
       .get(`http://localhost:8000/getName?token=${token}`)
       .then((res) => {
-        console.log(res.data)
-        setName(res.data)
+        console.log(res.data);
+        setName(res.data);
       })
       .catch((e) => {
-        console.log(e)
-      })
+        console.log(e);
+      });
   }, []);
 
   return (
     <div className={styles.PSCSS}>
+      <video autoPlay loop muted className={styles.bgVideo}>
+        <source src={bgVideo2} type="video/mp4" />
+      </video>
       <div className={` ${styles.navbarCustom}`}>
         <img
           src={logo}
@@ -72,10 +74,7 @@ const ProfileScreen = () => {
           <div class={styles.psCard}>
             <div class={styles.psCardHeader}>
               <div class={styles.psCardPhoto}>
-                <img
-                  src={avatar}
-                  alt=""
-                />
+                <img src={avatar} alt="" />
               </div>
             </div>
             <div class={styles.psCardBody}>
@@ -91,7 +90,9 @@ const ProfileScreen = () => {
                   </button>
                 </Link>
                 <Link to="/home/all">
-                  <button class={`${styles.psBtn} ${styles.psBtnOutlinePrimary}`}>
+                  <button
+                    class={`${styles.psBtn} ${styles.psBtnOutlinePrimary}`}
+                  >
                     Home
                   </button>
                 </Link>
