@@ -1,5 +1,5 @@
 .lv-main {
-    border: 1px black;
+    /* border: 1px black; */
     /* background-color: aqua; */
     height: 100%;
     width: 100%;
@@ -13,9 +13,12 @@
 }
 
 .lv-box {
-    background-color: #292343;
-    border: 1px black;
+    background-color: #ffffff7d;
+    border-radius: 12px;
+    backdrop-filter: blur(33px);
+    box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
     flex: 1;
+    color: rgba(0,0,0,0.8);
     margin: 1rem;
     max-height: 20vh;
     min-height: 20vh;
@@ -28,7 +31,9 @@
 }
 
 .left-box img {
-    width: 100%
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
 .right-box {
@@ -38,9 +43,9 @@
 }
 
 .lv-video-title {
-    color: white;
+    color: rgba(0,0,0,0.8);
 }
 
 .lv-date {
-    color: white;
+    color: rgba(0,0,0,0.8);
 }

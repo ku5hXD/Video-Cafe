@@ -143,7 +143,7 @@
   position: relative;
   bottom: 10px;
   left: 10px;
-  box-shadow: -8px 8px 0px rgb(85, 34, 0);
+  box-shadow: -8px 8px 0px #044f91;
   border: 1px solid black;
   /* border-radius: 0px; */
 }

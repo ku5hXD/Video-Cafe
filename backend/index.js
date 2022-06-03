@@ -43,7 +43,7 @@ app.post("/submit", Auth, async (req, res) => {
   video_details.save(function (err, videodetail) {
     if (err) return console.error(err);
     // console.log(videodetail.videoname + " saved to video-details collection.");
-    res.send("video details stored in DB")
+    res.send("video details stored in DB");
   });
 });
 
@@ -58,54 +58,55 @@ app.get("/details2", async (req, res) => {
       });
   } else {
     if (!req.query.category) {
-      var tempArr;
-      await VideoDetails.find({})
-        .then((arr) => {
-          tempArr = arr;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // var tempArr;
 
-      // for adding video owner name and picture to the fetched data
-      var finalArr = [];
-      var tempArrLength = tempArr.length;
-      tempArr.forEach(async (element, index) => {
-        await User.findOne({ _id: element.owner })
-          .then((data) => {
-            element = { ...element._doc, ownerName: data.name, ownerAvatar: data.avatar }
-            finalArr = [...finalArr, element]
-            tempArrLength--;
-            if (tempArrLength === 0) {
-              res.status(201).send(finalArr);
-            }
-          })
-      });
+      try {
+        const tempArr = await VideoDetails.find({});
+
+        // for adding video owner name and picture to the fetched data
+        var finalArr = [];
+        var tempArrLength = tempArr.length;
+        tempArr.forEach(async (element, index) => {
+          const data = await User.findOne({ _id: element.owner });
+          element = {
+            ...element._doc,
+            ownerName: data.name,
+            ownerAvatar: data.avatar,
+          };
+          finalArr = [...finalArr, element];
+          tempArrLength--;
+          if (tempArrLength === 0) {
+            res.status(201).send(finalArr);
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
     } else {
-      var tempArr;
-      await VideoDetails.find({ category: req.query.category })
-        .then((arr) => {
-          tempArr = arr;
-        })
-        .catch((err) => {
-          console.log(err);
+      try {
+        const tempArr = await VideoDetails.find({
+          category: req.query.category,
         });
 
-      // for adding video owner name and picture to the fetched data
-      var finalArr = [];
-      var tempArrLength = tempArr.length;
-      tempArr.forEach(async (element, index) => {
-        await User.findOne({ _id: element.owner })
-          .then((data) => {
-            element = { ...element._doc, ownerName: data.name, ownerAvatar: data.avatar }
-            finalArr = [...finalArr, element]
-            tempArrLength--;
-            if (tempArrLength === 0) {
-              res.status(201).send(finalArr);
-            }
-          })
-      });
-
+        // for adding video owner name and picture to the fetched data
+        var finalArr = [];
+        var tempArrLength = tempArr.length;
+        tempArr.forEach(async (element, index) => {
+          const data = await User.findOne({ _id: element.owner });
+          element = {
+            ...element._doc,
+            ownerName: data.name,
+            ownerAvatar: data.avatar,
+          };
+          finalArr = [...finalArr, element];
+          tempArrLength--;
+          if (tempArrLength === 0) {
+            res.status(201).send(finalArr);
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 });
@@ -124,8 +125,6 @@ app.get("/date", async (req, res) => {
 app.get("/getName", Auth, async (req, res) => {
   res.send(req.user.name);
 });
-
-
 
 app.get("/getVideoById", Auth, async (req, res) => {
   await VideoDetails.find({ owner: req.user._id })
