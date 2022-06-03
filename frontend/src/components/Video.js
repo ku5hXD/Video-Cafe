@@ -10,6 +10,7 @@ const Video = (props) => {
   const _id = props.match.params.videoId;
   const [change, setChange] = useState(false);
   const [specificDate, setSpecificDate] = useState("1");
+  const mainDivRef = useRef();
 
   const [details, setDetails] = useState({
     videolink: "",
@@ -21,6 +22,10 @@ const Video = (props) => {
 
   const [dates, setDates] = useState([]);
   const [data2, setData2] = useState([]);
+
+  // will help in scrolling to top
+  let mainDiv = document.getElementById('main-div');
+  const [count, setCount] = useState(0);
 
 
   const options = {
@@ -64,6 +69,7 @@ const Video = (props) => {
               description: res.data[i].description,
               category: res.data[i].category,
               thumbnailpath: res.data[i].thumbnailPath,
+              date: res.data[i].uploadDate,
             },
           ];
         }
@@ -73,11 +79,10 @@ const Video = (props) => {
         console.log(e);
       });
 
+    // no use of this, already included date in details2 API
     axios
       .get("http://localhost:8000/date")
       .then((res) => {
-
-
         const clone = [];
         res.data.forEach((data) => {
 
@@ -88,13 +93,18 @@ const Video = (props) => {
         });
 
         setDates(clone);
-        console.log(dates);
+        // console.log(dates);
         console.log("specific date", specificDate);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // scroll to TOP
+
+    mainDiv?.scrollTo({ top: 0, behavior: 'smooth' });
   }, [change]);
+
 
 
   return (
@@ -106,7 +116,7 @@ const Video = (props) => {
           <button className="upld-btn">HOME</button>
         </Link>
       </div>
-      <div className="video-main-div">
+      <div ref={mainDivRef} className="video-main-div" id="main-div">
         <div className="div--1">
           <video
             ref={videoRef}
@@ -140,13 +150,14 @@ const Video = (props) => {
                   >
                     <Thumbnail
                       thumbnailpath={element.thumbnailpath}
+                      screen={"mainScreen"}
                       key={index}
                     />
                     <div style={{ marginLeft: "0.5rem" }}>
                       <h4 className="video--title">{element.videoname}</h4>
 
                       <p className="category">{element.category}</p>
-                      <p className="date">{getDate(dates[index])}</p>
+                      <p className="date">{getDate(element.date)}</p>
                     </div>
                   </Link>
                 </div>

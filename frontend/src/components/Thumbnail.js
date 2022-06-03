@@ -1,17 +1,26 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-const Thumbnail = ({ thumbnailpath }) => {
+const Thumbnail = ({ thumbnailpath, screen }) => {
+  const [thumbPath, setThumbPath] = useState("");
+  useEffect(() => {
+    axios.get(thumbnailpath)
+      .then((res) => {
+        // console.log(res.data)
+        setThumbPath(res.data)
+      })
+  }, [])
 
   return (
-
     <div>
       <img
-        key={thumbnailpath}
-        src={thumbnailpath}
+        key={thumbPath}
+        src={thumbPath ? thumbPath : "https://ipfs.infura.io/ipfs/QmbkypPjJJDMix9rhiLxkVy1hLFLgPWTBuRrChcU8crTrS"}
         style={{
-          width: 350,
-          borderTopRightRadius: "10px",
+          width: screen === "mainScreen" ? 350 : 270,
+          borderTopRightRadius: screen === "mainScreen" ? "10px" : "0px",
           borderTopLeftRadius: "10px",
+          borderBottomLeftRadius: screen === "listScreen" ? "10px" : "0px",
         }}
         alt="video-thumbnail"
       />

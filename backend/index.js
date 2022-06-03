@@ -37,7 +37,7 @@ app.post("/submit", Auth, async (req, res) => {
     description: req.query.videodescription,
     category: req.query.videocategory,
     uploadDate: new Date(),
-    thumbnailPath: "https://i.ytimg.com/vi/AwhyFo5N0cg/maxresdefault.jpg",
+    thumbnailPath: req.query.videothumbnail,
     owner: req.user._id,
   });
   video_details.save(function (err, videodetail) {

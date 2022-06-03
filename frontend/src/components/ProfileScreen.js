@@ -125,7 +125,9 @@ const ProfileScreen = () => {
             >
               Your Videos
             </button>
-            <button
+
+            {/* // WILL DO LATER */}
+            {/* <button
               className={styles.tabBtn}
               onClick={() => {
                 console.log("tab2");
@@ -133,7 +135,7 @@ const ProfileScreen = () => {
               }}
             >
               Liked Videos
-            </button>
+            </button> */}
           </div>
           <div className={styles.rightBody}>
             <div

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Thumbnail from "./Thumbnail";
 import getDate from "./GetDate";
+import axios from "axios";
 import "../css/ListVideo.css";
 
 const ListVideo = ({ data, dates }) => {
+
   if (data.length === 0) {
     return <img src="https://beaumonthfsi.com/img/no-video.gif" />;
   }
@@ -25,7 +27,8 @@ const ListVideo = ({ data, dates }) => {
             >
               <div className="lv-box">
                 <div className="left-box">
-                  <img src={element.thumbnailpath} key={index} />
+                  <Thumbnail thumbnailpath={element.thumbnailpath} screen="listScreen" key={index} />
+                  {/* <img src={thumbPath ? thumbPath : "https://ipfs.infura.io/ipfs/QmbkypPjJJDMix9rhiLxkVy1hLFLgPWTBuRrChcU8crTrS"} key={index} /> */}
                 </div>
                 <div className="right-box">
                   <h4 className="lv-video-title">{element.videoname}</h4>

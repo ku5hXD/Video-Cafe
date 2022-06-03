@@ -18,7 +18,7 @@
     backdrop-filter: blur(33px);
     box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
     flex: 1;
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
     margin: 1rem;
     max-height: 20vh;
     min-height: 20vh;
@@ -30,11 +30,11 @@
     flex: 2;
 }
 
-.left-box img {
+/* .left-box img {
     width: 100%;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
-}
+} */
 
 .right-box {
     padding: 1rem;
@@ -43,9 +43,9 @@
 }
 
 .lv-video-title {
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .lv-date {
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
 }

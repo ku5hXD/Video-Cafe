@@ -18,6 +18,8 @@ import { useHistory } from "react-router-dom"
 
 import ReactLoading from 'react-loading';
 
+import VideoThumbnail from 'react-video-thumbnail';
+
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
 
@@ -48,6 +50,7 @@ const Upload = () => {
     accept: "video/mp4",
   });
 
+  const [videoURL, setVideoURL] = useState("");
   const [videoFile, setVideoFile] = useState();
   const [bufferFile, setBufferFile] = useState(null);
   const [details, setDetails] = useState({
@@ -91,28 +94,35 @@ const Upload = () => {
           setLoading(true)
           const created = await client.add(Buffer(reader.result));
           const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+          setVideoURL(url);
           console.log("video uploaded at : ", url)
-          setLoading(false)
-          axios
-            .post(
-              `http://localhost:8000/submit?videolink=${url}&videoname=${details.name}&videodescription=${details.description}&videocategory=${details.category}&token=${token}`
-            )
-            .then(function (response) {
-              console.log(response);
-              alert("video uploaded");
-              history.push("/home/all");
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-
         } catch (error) {
+          setLoading(false)
+          alert("Sorry video could not be uploaded, try again later.")
           console.log(error.message);
         }
       }
     }
   };
 
+  const thumbnailCreated = async (thumbnail) => {
+    const createdThumb = await client.add(thumbnail);
+    const thumbURL = `https://ipfs.infura.io/ipfs/${createdThumb.path}`;
+    console.log(thumbURL)
+    setLoading(false)
+    axios
+      .post(
+        `http://localhost:8000/submit?videolink=${videoURL}&videoname=${details.name}&videodescription=${details.description}&videothumbnail=${thumbURL}&videocategory=${details.category}&token=${token}`
+      )
+      .then((response) => {
+        console.log(response);
+        alert("video uploaded");
+        history.push("/home/all");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
 
   return (
@@ -126,7 +136,7 @@ const Upload = () => {
           ?
           <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: "center", position: 'absolute', backgroundColor: "rgba(0, 0, 0, 0.4)", height: '100vh', width: '100vw' }}>
             <ReactLoading type={'bars'} color={'white'} height={200} width={112} />
-            <p style={{ marginTop: '-5rem', fontSize: '2rem', color: "white" }}>Uploading Video!</p>
+            <p style={{ marginTop: '-5rem', fontSize: '2rem', color: "white" }}>{!videoURL ? "Uploading Video!" : "Generating Thumbnail!"}</p>
           </div>
           :
           <div style={{ display: 'none' }}>
@@ -138,6 +148,17 @@ const Upload = () => {
             <img src={logo} />
             <p>VIDEO CAFE</p>
           </div>
+          {/* Just for generating thumbnails */}
+          <div style={{ display: "none" }}>
+            <VideoThumbnail
+              videoUrl={videoURL}
+              thumbnailHandler={thumbnailCreated}
+              width={0}
+              height={0}
+              snapshotAtTime={10}
+            />
+          </div>
+
 
         </div>
 

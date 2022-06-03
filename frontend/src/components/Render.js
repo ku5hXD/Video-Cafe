@@ -16,7 +16,7 @@ const Render = ({ data, dates }) => {
                 to={`/video/${element._id}`}
                 style={{ textDecoration: "none" }}
               >
-                <Thumbnail thumbnailpath={element.thumbnailpath} key={index} />
+                <Thumbnail thumbnailpath={element.thumbnailpath} screen="mainScreen" key={index} />
                 <div className="video-desc" style={{ marginLeft: "0.5rem" }}>
                   <img
                     className="video-desc-left"

@@ -31,7 +31,7 @@
     object-fit: cover;
     transform: translate(-50%, -50%);
     -webkit-filter: blur(5px);
-  }
+}
 
 .PSCSS img {
     height: 100%;
@@ -154,6 +154,7 @@
     font-size: 35px;
     font-weight: 700;
     margin: 0 0 0 135px;
+    margin-left: -0.5rem;
     color: #b3b8cd;
 }
 
@@ -214,22 +215,25 @@
     flex: 1;
     /* justify-content:end; */
     /* border: 1px; */
-   
+
     /* border-color: black; */
-    border:1px solid #b3b8cd;
+    /* border: 1px solid #b3b8cd; */
 }
 
 .PSCSS .tabBtn {
     flex: 1;
     font-family: cursive;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     background-color: #003466;
     color: #b3b8cd;
+    border: 2px solid #1f1a32;
 }
 
 .PSCSS .rightBody {
     flex: 13;
     overflow: hidden;
+    border: 2px solid #1f1a32;
+    background-color: #1f1a32;
 }
 
 .PSCSS .activeTab {
@@ -237,7 +241,9 @@
     height: 100%;
     /* border: 1px black; */
     overflow: hidden;
-    background-image: url(https://bafybeibjyoyajb2znqx4dtn4y2ukujyg7yf25eim5e3km5sx7apupwugi4.ipfs.infura-ipfs.io/);
+    background-color: #1f1a32;
+    /* background-image: url(https://bafybeibjyoyajb2znqx4dtn4y2ukujyg7yf25eim5e3km5sx7apupwugi4.ipfs.infura-ipfs.io/); */
+    background-image: url(https://ipfs.infura.io/ipfs/QmXYv25ute42xhu7d8Gk4ZacSX6BEdhpzMzaUwKWRxgHRM);
 }
 
 .PSCSS .hiddenTab {
