@@ -157,7 +157,12 @@
 .upload-container .selectedFileName {
   margin-top: 0.3rem;
   margin-bottom: 0px;
+  height: 1.5rem;
+  width: 30rem;
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .upload-container .right-form-name-desc-div {

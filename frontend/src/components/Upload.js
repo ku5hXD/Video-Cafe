@@ -47,7 +47,9 @@ const Upload = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "video/mp4",
+    accept: {
+      'video/mp4': ['.mp4', '.mkv']
+    }
   });
 
   const [videoURL, setVideoURL] = useState("");
@@ -79,6 +81,9 @@ const Upload = () => {
     var file;
     if (!videoFile) {
       alert("please choose video file");
+    }
+    else if (details.name === "" || details.description === "") {
+      alert("Please fill name or description!!")
     }
     else {
 

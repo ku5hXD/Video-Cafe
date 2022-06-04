@@ -6,7 +6,7 @@ const Thumbnail = ({ thumbnailpath, screen }) => {
   useEffect(() => {
     axios.get(thumbnailpath)
       .then((res) => {
-        // console.log(res.data)
+        console.log(thumbnailpath)
         setThumbPath(res.data)
       })
   }, [])

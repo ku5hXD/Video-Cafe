@@ -48,6 +48,7 @@ app.post("/submit", Auth, async (req, res) => {
 });
 
 app.get("/details2", async (req, res) => {
+  // console.log("welcome to backend, category: ", req.query.category, "mid : ", req.query.mid)
   if (req.query.id) {
     await VideoDetails.findOne({ _id: mongoose.Types.ObjectId(req.query.id) })
       .then((data) => {
@@ -59,10 +60,10 @@ app.get("/details2", async (req, res) => {
   } else {
     if (!req.query.category) {
       // var tempArr;
-
+      // console.log("welcome to backend")
       try {
-        const tempArr = await VideoDetails.find({});
-
+        let tempArr = await VideoDetails.find({}).skip(req.query.mid).limit(6)
+        // tempArr = tempArr.slice(0, 6)
         // for adding video owner name and picture to the fetched data
         var finalArr = [];
         var tempArrLength = tempArr.length;
@@ -76,6 +77,7 @@ app.get("/details2", async (req, res) => {
           finalArr = [...finalArr, element];
           tempArrLength--;
           if (tempArrLength === 0) {
+            // console.log("data sent from backend")
             res.status(201).send(finalArr);
           }
         });
@@ -86,7 +88,7 @@ app.get("/details2", async (req, res) => {
       try {
         const tempArr = await VideoDetails.find({
           category: req.query.category,
-        });
+        }).skip(req.query.mid).limit(6);
 
         // for adding video owner name and picture to the fetched data
         var finalArr = [];

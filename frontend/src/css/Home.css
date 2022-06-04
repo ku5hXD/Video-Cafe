@@ -117,14 +117,19 @@
 }
 
 .homeCSS .right-bar {
+
+  /* overflow-y: scroll; */
+  /* padding-bottom: 100px; */
+  /* scroll-padding-bottom: 10em; */
+  /* border-bottom: 100px solid #18181b; */
+}
+
+.homeCSS .right-bar-scroll {
   height: 100vh;
   padding-top: 7rem;
   background-color: #18181b;
   padding-left: 18rem;
   overflow-y: scroll;
-  /* padding-bottom: 100px; */
-  /* scroll-padding-bottom: 10em; */
-  /* border-bottom: 100px solid #18181b; */
 }
 
 .homeCSS .custom-card {

@@ -6,6 +6,7 @@ const News = () => {
 
   const [data, setData] = useState([]);
   const [dates, setDates] = useState([]);
+  const [mid, setMid] = useState(0);
 
   const handleDetails = (value) => {
     setData(value)
@@ -14,13 +15,20 @@ const News = () => {
     setDates(value)
   }
 
+  const handleScroll = (e) => {
+    if (e.target.clientHeight + e.target.scrollTop >= e.target.scrollHeight) {
+      setMid(data.length)
+    }
+  }
+
   useEffect(() => {
+    fetchData('', handleDetails, handleDates, data, mid)
+  }, [mid]);
 
-    fetchData('News', handleDetails, handleDates)
-
-  }, []);
-
-  return <Render data={data} dates={dates} />
+  return (
+    <div className="right-bar-scroll" onScroll={handleScroll}>
+      <Render data={data} dates={dates} />
+    </div>)
 
 };
 

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const fetchData = (category, handleDetails, handleDates) => {
+const fetchData = (category, handleDetails, handleDates, data, mid) => {
   axios
-    .get(`http://localhost:8000/details2?category=${category}`)
+    .get(`http://localhost:8000/details2?category=${category}&mid=${mid}`)
     .then((res) => {
       var dataDuplicate = [];
       for (var i = 0; i < res.data.length; i++) {
@@ -46,7 +46,7 @@ const fetchData = (category, handleDetails, handleDates) => {
 
       handleDates([]);
 
-      handleDetails(dataDuplicate);
+      handleDetails([...data, ...dataDuplicate]);
     })
     .catch((e) => {
       console.log(e);

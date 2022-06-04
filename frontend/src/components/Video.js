@@ -26,7 +26,7 @@ const Video = (props) => {
   // will help in scrolling to top
   let mainDiv = document.getElementById('main-div');
   const [count, setCount] = useState(0);
-
+  const [mid, setMid] = useState(0)
 
   const options = {
     month: "long",
@@ -55,29 +55,7 @@ const Video = (props) => {
         console.log(e);
       });
 
-    axios
-      .get("http://localhost:8000/details2")
-      .then((res) => {
 
-        var dataDuplicate = [];
-        for (var i = 0; i < res.data.length; i++) {
-          dataDuplicate = [
-            ...dataDuplicate,
-            {
-              _id: res.data[i]._id,
-              videoname: res.data[i].videoName,
-              description: res.data[i].description,
-              category: res.data[i].category,
-              thumbnailpath: res.data[i].thumbnailPath,
-              date: res.data[i].uploadDate,
-            },
-          ];
-        }
-        setData2(dataDuplicate);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
 
     // no use of this, already included date in details2 API
     axios
@@ -105,6 +83,40 @@ const Video = (props) => {
     mainDiv?.scrollTo({ top: 0, behavior: 'smooth' });
   }, [change]);
 
+  useEffect(() => {
+
+    axios
+      .get(`http://localhost:8000/details2?mid=${mid}`)
+      .then((res) => {
+
+        var dataDuplicate = [];
+        for (var i = 0; i < res.data.length; i++) {
+          dataDuplicate = [
+            ...dataDuplicate,
+            {
+              _id: res.data[i]._id,
+              videoname: res.data[i].videoName,
+              description: res.data[i].description,
+              category: res.data[i].category,
+              thumbnailpath: res.data[i].thumbnailPath,
+              date: res.data[i].uploadDate,
+            },
+          ];
+        }
+        setData2([...data2, ...dataDuplicate]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+  }, [mid])
+
+  const handleScroll = (e) => {
+    if (e.target.clientHeight + e.target.scrollTop >= e.target.scrollHeight) {
+      setMid(data2.length)
+    }
+  }
+
 
 
   return (
@@ -116,7 +128,7 @@ const Video = (props) => {
           <button className="upld-btn">HOME</button>
         </Link>
       </div>
-      <div ref={mainDivRef} className="video-main-div" id="main-div">
+      <div ref={mainDivRef} className="video-main-div" id="main-div" onScroll={handleScroll}>
         <div className="div--1">
           <video
             ref={videoRef}
