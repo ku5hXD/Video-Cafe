@@ -1,5 +1,5 @@
 # Video-Cafe
-["click here" to start using Video-Cafe!](https://https://video-cafe.netlify.app/)
+["click here" to start using Video-Cafe!](https://video-cafe.netlify.app/)
 
 This is a *video sharing* website, which is built using tech stack like (***React JS***)[https://reactjs.org/] for frontend, (***Node***)[https://nodejs.org/en/] for backend, and is using [***Mongo DB***](https://www.mongodb.com/) for it's database.
 
